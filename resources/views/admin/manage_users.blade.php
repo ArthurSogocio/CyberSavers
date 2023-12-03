@@ -42,7 +42,7 @@ $access_lvl = Auth::user()->access_level;
                             <div class="card-header">User Management</div>
                             <div class="card-body">
                                 <div class='row top-buffer'>
-                                    <a href="{{ route('manage_users') }}" class='btn btn-block btn-success'>Manage Users</a>
+                                    <a href="{{ route('dice_stats') }}" class='btn btn-block btn-success'>Manage Users</a>
                                 </div>
                             </div>
                         </div>
