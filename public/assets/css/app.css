@@ -11,7 +11,7 @@ body {
 }
 
 nav.navbar .navbar-brand, a.nav-link {
-    color: darkred !important;
+    color: darkblue !important;
     font-family: Beyonders !important;
 }
 
@@ -27,4 +27,12 @@ div.card-header {
 
 div.card-border {
     
+}
+
+.top-buffer { 
+    margin-top:20px !important; 
+}
+
+button.btn, a.btn {
+    font-family: Beyonders !important;
 }

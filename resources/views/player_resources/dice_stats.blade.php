@@ -31,7 +31,7 @@
             <div class='row top-buffer'>
                 <div class='col-lg-6'>
                     <div class="card">
-                        <div class="card-header">Player Info</div>
+                        <div class="card-header">TEST</div>
 
                         <div class="card-body">
                             <p class="text-center">You may view and modify your current stats here.</p>
@@ -52,16 +52,13 @@
                         <div class="card-body">
                             <p class="text-center">Information on details of NetSavers&#x2122; are listed here for your convenience.</p>
                             <div class='row top-buffer'>
-                                <a href="{{ route('dice_stats') }}" class='btn btn-block btn-primary'>Dice and Stats</a>
+                                <a href="{{ url('/player_resources/dice_stats') }}" class='btn btn-block btn-primary'>Dice and Stats</a>
                             </div>
                             <div class='row top-buffer'>
                                 <button class='btn btn-block btn-primary'>Classes</button>
                             </div>
                             <div class='row top-buffer'>
                                 <button class='btn btn-block btn-primary'>Aspects</button>
-                            </div>
-                            <div class='row top-buffer'>
-                                <button class='btn btn-block btn-primary'>Encountered NPCs</button>
                             </div>
                         </div>
 
