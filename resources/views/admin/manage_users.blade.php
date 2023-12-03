@@ -2,105 +2,64 @@
 
 @section('content')
 
+
 <?php
-$access_lvl = Auth::user()->access_level;
+$user = Auth::user();
+$access_lvl = $user->access_level;
+//var_dump($user->email);
 ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 container">
-            
-            <!-- intro card -->
-            <div class='row top-buffer'>
-                <div class='col'>
-                    <div class="card">
-                        <div class="card-header">{{ __('Welcome, ') . " " . Auth::user()->name . "!" }}</div>
 
+            <!-- user management -->
+            <div class='row top-buffer'>
+                <div class='col-lg-12'>
+                    <div class="card">
+                        <div class="card-header">Manage Users</div>
                         <div class="card-body">
-                            <?php
-                            if (session('status')) {
-                                ?>
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                                <?php
+                            <table id="userstable" class="table table-striped table-hover table-fw-widget">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Access Level</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#userstable').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": {
+                            url: "{{ route('ajax.getusers') }}",
+                            error: function (reason) {
+                                console.log(reason);
                             }
-                            ?>
-
-                            <p class="text-center">Connected to <b>Zwei.Net</b>, powered by <i>EnerBoost&#x2122;</i>. You may access your player character data and any information you have gathered in <b>ZweiTopia</b> here.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <?php
-            //user access only visible by access level 9 - Administrator
-            if ($access_lvl >= 9) {
-                ?>
-                <div class='row top-buffer'>
-                    <div class='col-lg-6'>
-                        <div class="card">
-                            <div class="card-header">User Management</div>
-                            <div class="card-body">
-                                <div class='row top-buffer'>
-                                    <a href="{{ route('dice_stats') }}" class='btn btn-block btn-success'>Manage Users</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class='col-lg-6'>
-                        <div class="card">
-                            <div class="card-header">Master Control</div>
-                            <div class="card-body">
-                                <div class='row top-buffer'>
-                                    <a href="{{ route('dice_stats') }}" class='btn btn-block btn-success'>Manage Active Players</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-
-            <!-- player pages -->
-            <div class='row top-buffer'>
-                <div class='col-lg-6'>
-                    <div class="card">
-                        <div class="card-header">Player Info</div>
-                        <div class="card-body">
-                            <p class="text-center">You may view and modify your current stats here.</p>
-                            <div class='row top-buffer'>
-                                <button class='btn btn-block btn-primary'>Current Stats</button>
-                            </div>
-                            <div class='row top-buffer'>
-                                <button class='btn btn-block btn-primary'>Stats Builder</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class='col-lg-6'>
-                    <div class="card">
-                        <div class="card-header">Player Resources</div>
-                        <div class="card-body">
-                            <p class="text-center">Information on details of NetSavers&#x2122; are listed here for your convenience.</p>
-                            <div class='row top-buffer'>
-                                <a href="{{ route('dice_stats') }}" class='btn btn-block btn-primary'>Dice and Stats</a>
-                            </div>
-                            <div class='row top-buffer'>
-                                <button class='btn btn-block btn-primary'>Classes</button>
-                            </div>
-                            <div class='row top-buffer'>
-                                <button class='btn btn-block btn-primary'>Aspects</button>
-                            </div>
-                            <div class='row top-buffer'>
-                                <button class='btn btn-block btn-primary'>Encountered NPCs</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        },
+                        "columns": [
+                            {"data": "id", "name": "id"},
+                            {"data": "name", "name": "name", render(data, type, row) {
+                                    return '<a href=" {{ url("/")}}/user/' + row.id + '/details">' + data + '</a>';
+                                }
+                            },
+                            {"data": "email", "name": "email"},
+                            {"data": "access_level.id", "name": "access_level", render(data, type, row) {
+                                    level_name = row["access_level"].access;
+                                    return level_name;
+                                }
+                            }
+                        ]
+                    });
+                });
+            </script>
         </div>
     </div>
 </div>
