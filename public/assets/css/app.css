@@ -10,7 +10,8 @@ body {
     background-color: #cccccc;
 }
 
-nav.navbar {
+nav.navbar .navbar-brand, a.nav-link {
+    color: darkred !important;
     font-family: Beyonders !important;
 }
 
