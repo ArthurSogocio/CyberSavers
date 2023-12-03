@@ -1,0 +1,4 @@
+body {
+    background-image: url("{{ asset('assets/img/main-bg.jpg') }}");
+    background-color: #cccccc;
+}

@@ -1,0 +1,29 @@
+@font-face {
+    font-family: Beyonders;
+    src: url('../fonts/Beyonders.ttf');
+}
+
+body {
+    background-image: url('../img/main-bg.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+}
+
+nav.navbar {
+    font-family: Beyonders !important;
+}
+
+div.card {
+    
+}
+
+div.card-header {
+    color: white;
+    background-color: #5893F5;
+    font-family: Beyonders !important;
+}
+
+div.card-border {
+    
+}
