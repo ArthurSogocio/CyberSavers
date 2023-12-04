@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\UserAccessLevels;
+use App\Models\UserDetails;
+use App\Models\UserClasses;
 
 class User extends Authenticatable {
 
@@ -47,6 +49,14 @@ class User extends Authenticatable {
     ];
 
     public function access_level() {
-        return $this->hasOne(UserAccessLevels::class, 'access_level');
+        return $this->hasOne(UserAccessLevels::class, 'access_level', 'access_level');
+    }
+
+    public function details() {
+        return $this->hasOne(UserDetails::class, 'user_id', 'id');
+    }
+
+    public function user_classes() {
+        return $this->hasMany(UserClasses::class, 'user_id', 'id');
     }
 }

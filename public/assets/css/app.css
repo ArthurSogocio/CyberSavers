@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url('../img/main-bg.jpg'); 
+    background-image: url('../img/main-bg.jpg'); /*switch to gif when necessary*/ 
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #cccccc;
@@ -12,6 +12,10 @@ body {
 
 nav.navbar .navbar-brand, a.nav-link {
     color: darkblue !important;
+    font-family: Beyonders !important;
+}
+
+h1, h2, h3, h4 {
     font-family: Beyonders !important;
 }
 
@@ -25,6 +29,12 @@ div.card-header {
     font-family: Beyonders !important;
 }
 
+div.card-header-error {
+    color: white;
+    background-color: #BB0026;
+    font-family: Beyonders !important;
+}
+
 div.card-border {
     
 }
@@ -33,6 +43,37 @@ div.card-border {
     margin-top:20px !important; 
 }
 
-button.btn, a.btn {
+button.btn, a.btn, .stat-label {
     font-family: Beyonders !important;
+}
+
+.stat-label {
+    font-size: 0.7em;
+}
+
+.muscle, .power, .speed {
+    border: 1px solid black !important;
+    background-color: lightcoral !important;
+    color: white !important;
+    text-align: center;
+}
+
+.head, .sense, .analytics {
+    border: 1px solid black !important;
+    background-color: greenyellow !important;
+    text-align: center;
+}
+
+.heart, .fortitude, .connection {
+    border: 1px solid black !important;
+    background-color: violet !important;
+    color: white !important;
+    text-align: center;
+}
+
+.soul, .identity, .spirituality {
+    border: 1px solid black !important;
+    background-color: lightskyblue !important;
+    color: white !important;
+    text-align: center;
 }

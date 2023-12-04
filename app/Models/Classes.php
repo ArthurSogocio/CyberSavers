@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Classes extends Model
 {
     use HasFactory;
+    
+    protected $connection = 'mysql';
+    protected $table = 'classes';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
 }
