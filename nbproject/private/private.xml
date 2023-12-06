@@ -3,17 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/ZweiNet/app/Models/UserDetails.php</file>
             <file>file:/C:/xampp/htdocs/ZweiNet/resources/views/layouts/app.blade.php</file>
             <file>file:/C:/xampp/htdocs/ZweiNet/app/Models/User.php</file>
             <file>file:/C:/xampp/htdocs/ZweiNet/routes/web.php</file>
-            <file>file:/C:/xampp/htdocs/ZweiNet/resources/js/app.js</file>
-            <file>file:/C:/xampp/htdocs/ZweiNet/resources/views/admin/manage_users.blade.php</file>
+            <file>file:/C:/xampp/htdocs/ZweiNet/resources/views/admin/user_details.blade.php</file>
             <file>file:/C:/xampp/htdocs/ZweiNet/app/Http/Controllers/AdminController.php</file>
             <file>file:/C:/xampp/htdocs/ZweiNet/resources/views/player_resources/dice_stats.blade.php</file>
-            <file>file:/C:/xampp/htdocs/ZweiNet/app/DataTables/UsersDataTable.php</file>
-            <file>file:/C:/xampp/htdocs/ZweiNet/config/app.php</file>
             <file>file:/C:/xampp/htdocs/ZweiNet/resources/views/home.blade.php</file>
-            <file>file:/C:/xampp/htdocs/ZweiNet/app/Http/Controllers/HomeController.php</file>
         </group>
     </open-files>
 </project-private>

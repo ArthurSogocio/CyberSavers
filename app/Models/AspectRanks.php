@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Stats;
 
-class Dice extends Model {
+class AspectRanks extends Model
+{
     use HasFactory;
-
     protected $connection = 'mysql';
-    protected $table = 'dice';
+    protected $table = 'aspect_ranks';
     protected $primaryKey = 'id';
     public $timestamps = false;
 }

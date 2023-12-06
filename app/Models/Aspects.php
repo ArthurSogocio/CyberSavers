@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Stats;
 
 class Aspects extends Model
 {
@@ -13,7 +14,11 @@ class Aspects extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    /*public function aspect() {
-        return $this->hasOne(Aspects::class, 'aspect_id', 'id');
-    }*/
+    public function boon() {
+        return $this->hasOne(Stats::class, 'stat_boon', 'id');
+    }
+    
+    public function bane() {
+        return $this->hasOne(Stats::class, 'stat_bane', 'id');
+    }
 }

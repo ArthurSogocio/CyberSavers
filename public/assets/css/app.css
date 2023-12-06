@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url('../img/main-bg.jpg'); /*switch to gif when necessary*/ 
+    background-image: url('../img/main-bg.jpg'); /*switch to gif when necessary*/
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #cccccc;
@@ -20,7 +20,7 @@ h1, h2, h3, h4 {
 }
 
 div.card {
-    
+
 }
 
 div.card-header {
@@ -36,11 +36,11 @@ div.card-header-error {
 }
 
 div.card-border {
-    
+
 }
 
-.top-buffer { 
-    margin-top:20px !important; 
+.top-buffer {
+    margin-top:20px !important;
 }
 
 button.btn, a.btn, .stat-label {
@@ -76,4 +76,15 @@ button.btn, a.btn, .stat-label {
     background-color: lightskyblue !important;
     color: white !important;
     text-align: center;
+}
+
+img.profile-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;  /* defining the aspect ratio of the image */
+    object-fit: cover;    /* making sure the image isn't distorted */
+}
+
+input.pw {
+    -webkit-text-security: disc;
+    text-security: disc;
 }
