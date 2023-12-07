@@ -38,3 +38,5 @@ Route::get('/user/{uid}/builder/', function ($uid) {
                     ->with('id', $id)
                     ->with('edit', $edit);
 })->middleware('auth');*/
+/* builder routes */
+Route::post('/builder', [UserController::class, 'buildUser'])->name('builder')->middleware('auth');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\UserStats;
+use App\Models\DiceModels;
 use Hash;
 
 class UserController extends Controller {
@@ -52,5 +53,39 @@ class UserController extends Controller {
         };
 
         return redirect('/user/' . $newuserid . '/details/')->with('success', 'User added!');
+    }
+    
+    public function buildUser (Request $request) {
+        $update_type = $request->get("update_type");
+        $uid = $request->get("uid");
+        $return = [];
+        $updated_user = User::find($uid);
+        
+        if ($update_type === "dice") {
+            //update dice values
+            $model_id = $request->get("model");
+            $muscle = $request->get("muscle");
+            $head = $request->get("head");
+            $heart = $request->get("heart");
+            $soul = $request->get("soul");
+            
+            //get the current dice model
+            $model = DiceModels::find($model_id);
+            
+            //update the player's dice
+            $user_details = $updated_user->details()->first();
+            $user_details->update([
+                'dice_model' => $model_id,
+                'muscle' => $model->$muscle,
+                'head' => $model->$head,
+                'heart' => $model->$heart,
+                'soul' => $model->$soul
+            ]);
+            
+            $return['details'] = $user_details;
+            $return['model_name'] = $model->model;
+        }
+        
+        return $return;
     }
 }

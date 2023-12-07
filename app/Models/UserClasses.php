@@ -15,7 +15,7 @@ class UserClasses extends Model
     protected $table = 'user_classes';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['user_id', 'class_id', 'rank'];
+    protected $fillable = ['user_id', 'main_class', 'class_id', 'rank'];
 
     public function user() {
         return $this->hasOne(User::class, 'id', 'user_id');

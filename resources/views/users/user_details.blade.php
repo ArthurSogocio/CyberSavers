@@ -7,6 +7,7 @@
 
 use App\Models\User;
 use App\Models\UserAccessLevels;
+use App\Models\XpControls;
 
 $user = Auth::user();
 $access_lvl = $user->access_level;
@@ -14,7 +15,19 @@ $access_lvl = $user->access_level;
 $selected_user = User::find($uid);
 $selected_access = $selected_user->access_level()->first();
 $selected_details = $selected_user->details()->first();
-$selected_aspect = $selected_details->aspect()->first();
+//get xp control values if the user is an active player
+$xpcontrol = XpControls::first();
+$current_level = $selected_details->level;
+$level_up = "";
+$xp = $xpcontrol->xp_cap;
+$xp_cap = $xpcontrol->xp_cap;
+if ($user->active_player == 1) {
+    $control_level = $xpcontrol->active_level;
+    if ($control_level > $current_level) {
+        $level_up = "You have extra levels to use. Please go to the Stats Builder.";
+    }
+    $xp = $xpcontrol->xp;
+}
 
 //if the user doesn't have access to this person's page, they should receive an error
 $permission = false;
@@ -61,19 +74,35 @@ if ($user->id == $selected_user->id || $user->access_level >= 9) {
                                         <div class="form-group row top-buffer">
                                             {{ Form::label('level', 'Level', ['class' => 'col-sm-4 control-label stat-label']) }}
                                             <div class="col-sm-8">
-                                                {{ Form::text("level", $selected_details->level, array('class' => 'form-control', 'style' => 'text-align: center;', 'id' => 'level', 'disabled' => 'disabled')) }}
+                                                {{ Form::text("level", $current_level, array('class' => 'form-control', 'style' => 'text-align: center;', 'id' => 'level', 'disabled' => 'disabled')) }}
                                             </div>
                                         </div>
+                                        <?php
+                                        if ($level_up != "") {
+                                            ?>
+                                            <div class="form-group row top-buffer">
+                                                {{ Form::label(null, $level_up, ['class' => 'col-sm-12 control-label stat-label', 'style' => 'color: green;']) }}
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
                                         <div class="form-group row top-buffer">
                                             {{ Form::label('xp', 'Current XP', ['class' => 'col-sm-4 control-label stat-label']) }}
                                             <div class="col-sm-8">
-                                                {{ Form::text("xp", "0/100", array('class' => 'form-control', 'style' => 'text-align: center;', 'id' => 'xp', 'disabled' => 'disabled')) }}
+                                                {{ Form::text("xp", $xp . " / " . $xp_cap, array('class' => 'form-control', 'style' => 'text-align: center;', 'id' => 'xp', 'disabled' => 'disabled')) }}
                                             </div>
                                         </div>
                                         <div class="form-group row top-buffer">
                                             {{ Form::label('aspect', 'Aspect', ['class' => 'col-sm-4 control-label stat-label']) }}
+                                            <?php
+                                            $aspect = "N/A";
+                                            if ($selected_details->aspect_id != 0) {
+                                                $selected_aspect = $selected_details->aspect()->first();
+                                                $aspect = $selected_aspect->aspect;
+                                            }
+                                            ?>
                                             <div class="col-sm-8">
-                                                {{ Form::text("aspect", $selected_aspect->aspect, array('class' => 'form-control', 'style' => 'text-align: center;', 'id' => 'aspect', 'disabled' => 'disabled')) }}
+                                                {{ Form::text("aspect", $aspect, array('class' => 'form-control', 'style' => 'text-align: center;', 'id' => 'aspect', 'disabled' => 'disabled')) }}
                                             </div>
                                         </div>
                                         <div class="form-group row top-buffer">
@@ -281,10 +310,12 @@ if ($user->id == $selected_user->id || $user->access_level >= 9) {
 
                                     //add values to each stat here
                                     //boon and bane bonuses
-                                    $boon = $selected_aspect->stat_boon;
-                                    $bane = $selected_aspect->stat_bane;
-                                    $bonusstats[$boon]['value'] += 2;
-                                    $bonusstats[$bane]['value'] -= 1;
+                                    if ($aspect != "N/A") {
+                                        $boon = $selected_aspect->stat_boon;
+                                        $bane = $selected_aspect->stat_bane;
+                                        $bonusstats[$boon]['value'] += 2;
+                                        $bonusstats[$bane]['value'] -= 1;
+                                    }
                                     //stat add bonus
                                     $mainstats['hp'] += max($bonusstats[1]["value"], $bonusstats[5]["value"]) + ($selected_details->level * 2); //power or fortitude + level*2 + healthy bonus
                                     $mainstats['initiative'] += max($bonusstats[2]["value"], $bonusstats[7]["value"]); //speed or identity
@@ -311,8 +342,6 @@ if ($user->id == $selected_user->id || $user->access_level >= 9) {
                                         'total acc' => "D", //dice value
                                         'total dmg' => 0
                                     ];
-
-                                    $selected_aspect = $selected_details->aspect()->first();
                                     //configure wp dice, range and weight
                                     $wpdice = $selected_details->wp_dice()->first();
                                     $wprange = $selected_details->wp_range()->first();
